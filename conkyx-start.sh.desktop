@@ -1,7 +1,0 @@
-[Desktop Entry]
-Exec=/home/renata/Scripts/conkyx-start.sh
-Icon=dialog-scripts
-Name=conkyx-start.sh
-Path=
-Type=Application
-X-KDE-AutostartScript=true
