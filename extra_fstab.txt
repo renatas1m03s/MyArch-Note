@@ -1,1 +1,0 @@
-/dev/disk/by-uuid/9f801499-529e-41af-8bcf-8760628cfa48 /mnt/Dados1 auto nosuid,nodev,nofail,x-gvfs-show 0 0
