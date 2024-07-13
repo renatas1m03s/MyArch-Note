@@ -4,6 +4,8 @@ sudo sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 8/g' /etc/pacman.conf
 sudo sed -i 's/#Color/Color\nILoveCandy/g' /etc/pacman.conf
 sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
+reflector -l 10 –sort rate –save /etc/pacman.d/mirrorlist
+
 echo -e '\nConfigurando timezone e locales\n'
 
 ln -sf /usr/share/zoneinfo/America/Fortaleza /etc/localtime
