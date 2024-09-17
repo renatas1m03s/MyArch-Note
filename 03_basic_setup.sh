@@ -4,14 +4,14 @@ sudo sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 8/g' /etc/pacman.conf
 sudo sed -i 's/#Color/Color\nILoveCandy/g' /etc/pacman.conf
 sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
+echo -e '\nConfiguring best arch mirror...\n\n'
+
 reflector -l 10 –sort rate –save /etc/pacman.d/mirrorlist
 
 echo -e '\nConfigurando timezone e locales\n'
 
 ln -sf /usr/share/zoneinfo/America/Fortaleza /etc/localtime
-sed -i s/#pt_BR.UTF-8/pt_BR.UTF-8/g /etc/locale.gen
-sed -i s/#en_US.UTF-8/en_US.UTF-8/g /etc/locale.gen && locale-gen && echo LANG=en_US.UTF-8 >> /etc/locale.conf
-#echo KEYMAP=us-acentos >> /etc/vconsole.conf
+sed -i s/#pt_BR.UTF-8/pt_BR.UTF-8/g /etc/locale.gen && locale-gen && echo LANG=en_US.UTF-8 >> /etc/locale.conf
 echo KEYMAP=br-abnt2 >> /etc/vconsole.conf
 
 echo -e '\n Instalando editores de texto básicos e o fish shell\n'
@@ -42,10 +42,10 @@ sudo usermod renata -aG libvirt
 
 echo -e '\nInstalando os pacotes básicos e habilitando o NetworkManager e sshd\n'
 
-sed -i 's/block filesystems fsck/block filesystems fsck plymouth/g' /etc/mkinitcpio.conf
-
 pacman -Sy --noconfirm dosfstools os-prober mtools networkmanager dialog sudo
 pacman -Sy --noconfirm rsync grub-efi-x86_64 efibootmgr openssh exfat-utils plymouth
+
+sed -i 's/block filesystems fsck/block filesystems fsck plymouth/g' /etc/mkinitcpio.conf
 
 systemctl enable NetworkManager && systemctl enable sshd
 

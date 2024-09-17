@@ -1,31 +1,39 @@
 #!/bin/bash
 
-yay -Sy --needed --noconfirm wireplumber pipewire-alsa pipewire-pulse lib32-pipewire bluez bluez-utils network-manager-applet
+yay -Sy --needed --noconfirm sof-firmware lib32-pipewire bluez-utils 
 
-yay -Sy --needed --noconfirm xorg gdm xorg-xwayland wayland xorg-xlsclients glfw-wayland egl-wayland
+yay -Sy --needed --noconfirm xorg gnome glfw-wayland egl-wayland gnome-terminal
 
-yay -Sy --needed --noconfirm gnome gnome-tweaks gnome-extension gnome-browser-connector gnome-shell-extensions breeze-gtk
+yay -Sy --needed --noconfirm gnome-tweaks gnome-browser-connector breeze-gtk power-profiles-daemon 
 
-yay -Sy --needed --noconfirm nautilus-sendto gnome-nettool gnome-usage gnome-multi-writer adwaita-icon-theme xdg-user-dirs-gtk fwupd arc-gtk-theme gnome-terminal
-
-# sudo sed -i 's/#WaylandEnable=false/WaylandEnable=true/g' /etc/gdm/custom.conf
-
-sudo sed -i 's/MODULES=()/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)/g' /etc/mkinitcpio.conf
-
-sudo mkinitcpio -P
+yay -Sy --needed --noconfirm gnome-nettool gnome-usage gnome-multi-writer fwupd arc-gtk-theme mesa-utils
 
 sudo ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
 
-# nvidia_drm.modeset=1 nvidia_drm.fbdev=1
+yay -Sy --needed --noconfirm inetutils dnsutils conky openconnect networkmanager-openconnect modemmanager pacman-contrib gdm-settings
 
-yay -Sy --needed --noconfirm inetutils dnsutils python-pip conky openconnect networkmanager-openconnect
-
-yay -Sy --needed  --noconfirm ffmpeg vlc neofetch openvpn google-chrome update-grub gthumb nufraw geany
+yay -Sy --needed  --noconfirm vlc neofetch openvpn google-chrome usb_modeswitch update-grub nufraw geany p7zip htop
 
 sudo cp -v ./ufraw.thumbnailer /usr/share/thumbnailers/
 
 yay -S --needed  --noconfirm adobe-source-han-sans-otc-fonts adobe-source-han-serif-otc-fonts noto-fonts noto-fonts-cjk noto-fonts-emoji
 
-sudo systemctl enable gdm.service
+sudo systemctl enable gdm
+sudo systemctl enable bluetooth
+sudo systemctl enable ModemManager
 
-echo -s "Alterar o grub para incluir os parametros NVIDIA"
+cp -v ./functions/* /home/renata/.config/fish/functions/
+
+yay -Sy --noconfirm tela-circle-icon-theme-ubuntu tela-circle-icon-theme-orange
+
+yay -Sy gnome-shell-extension-dash-to-dock
+
+sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
+sudo chmod a+rx /usr/local/bin/yt-dlp
+
+echo -e "\n\nApós acabar executar:\n\nomf install lambda && omf theme lambda\n\n"
+
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+
+
+
